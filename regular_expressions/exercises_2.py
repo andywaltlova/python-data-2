@@ -1,3 +1,5 @@
+import re
+
 """
 9 Uživatelské jméno
 Náš systém vyžaduje od uživatele zadání uživatelského jména.
@@ -5,27 +7,57 @@ Uživatelské jméno smí obsahovat pouze malá písmena a smí být maximálně
 Požádej uživatele o zadání uživatelského jména a pomocí regulárního výrazu vyhodnoť, zda je zadané správné.
 """
 
+# re_str = r"[a-z]{1,8}"
+# regularni_vyraz = re.compile(re_str)
+
+# uzivatelske_jmeno = input("Zadej uživatelského jména: ")
+# vysledek = regularni_vyraz.fullmatch(uzivatelske_jmeno)
+# if vysledek:
+#     print("Uživatelské jméno je v pořádku.")
+# else:
+#     print("Uživatelské jméno nesplňuje požadavky")
+
 
 """
 10 E-mail s tečkou
 Uprav program na ověření e-mailu tak, aby akceptoval i e-maily, které mají v první části tečku, např. jiri.pesik@python.cz.
 """
 
+# re_str = r"\w*\.?\w+@\w+\.cz"
+# regularni_vyraz = re.compile(re_str)
+# email = input("Zadej e-mail: ")
+# hledani = regularni_vyraz.fullmatch(email)
+# if hledani:
+#     print("E-mail je v pořádku!")
+# else:
+#     print("Nesprávný e-mail!")
+
+
 """
 11 Záznamy
 Uvažujme aplikaci, která si ukládá informace o činnosti uživatelů do textového souboru. Příklad souboru je níže.
 """
-
 zaznamy = """
 searchNumber: pavca.czechitas action: search phone number of user dita
 user: pavca action: send sms to phone number +420728123456
 user: jirka: action: send 2 sms to phone number +420734123456
+user: andy: action: send 2 sms to phone number +420+74123456
+
 """
 
 """
 Napiš program, který vypíše všechna telefonní čísla, která jsou v textovém souboru zmíněna.
 Nahraď tato telefonní čísla nějakým řetězcem (např. “XXX”), aby nebyla v záznamech dostupná.
 """
+
+re_str = r"\+?\d{12}"
+# regularni_vyraz = re.compile(re_str)
+# vysledky = regularni_vyraz.findall(zaznamy)
+# for vysledek in vysledky:
+#     print(vysledek)
+# anonymni_zaznamy = regularni_vyraz.sub("X" * 13, zaznamy)
+# print(anonymni_zaznamy)
+
 
 
 """
@@ -37,14 +69,23 @@ Standardního tvaru můžeme využít, abychom z textu vytáhli všechny adresy.
 Napiš program, který z proměnné emailSRadami vytáhne všechny webové stránky, které jsou tam zmíněny.
 """
 
-emailSRadami = """
+email_s_radami = """
 Ahoj,
 posílám ti pár tipů, kam se podívat. https://realpython.com nabízí spoustu článků i kurzů.
 http://docs.python.org nabízí tutoriál i rozsáhlou dokumentaci.
 http://www.learnpython.org nabízí hezky strukturovaný kurz pro začátečníky, rozebírá ale i nějaká pokročilejší témata.
 https://www.pluralsight.com je placený web, který ale kvalitou kurzů víceméně nemá konkurenci.
 Určitě ale sleduj i web https://www.czechitas.cz a přihlašuj se na naše kurzy!
+http://czechitas.cz
+https://a.b
 """
+
+# re_str = r"https?://\w+\.\w+\.\w+"
+# regularni_vyraz = re.compile(re_str)
+# vysledky = regularni_vyraz.findall(email_s_radami)
+# for vysledek in vysledky:
+#     print(vysledek)
+
 
 """
 13 IP adresy
@@ -59,6 +100,16 @@ Např. adresa 325.125.100.128 není platná (první číslo je větší než 255
 adresa 152.145.146 také není platá (jde o trojici čísel, nikoli čtveřici),
 adresa 192.168.1.0 je platná (čtveřice čísel v daném rozsahu).
 """
+
+re_str = r"[12]?\d{1,2}\.[12]?\d{1,2}\.[12]?\d{1,2}\.[12]?\d{1,2}"
+regularni_vyraz = re.compile(re_str)
+uzivatelske_jmeno = input("Zadej adresu serveru: ")
+vysledek = regularni_vyraz.fullmatch(uzivatelske_jmeno)
+if vysledek:
+    print("Odesílám zprávu.")
+else:
+    print("Adresa není platná.")
+
 
 """ 14 Práce s kódem
 smrt v přímém přenosu
@@ -84,3 +135,12 @@ if action == "send":
 else:
     button_title = "Uložit koncept"
 """
+
+re_str = r'[\w_]* \= \"[\w ]*\"'
+regularni_vyraz = re.compile(re_str)
+vysledky = regularni_vyraz.findall(kod)
+
+# for vysledek in vysledky:
+#     regularni_vyraz_vnitrni = re.compile(r'\"[\w ]*\"')
+#     vysledky_vnitrni = regularni_vyraz_vnitrni.findall(vysledek)
+#     print(vysledky_vnitrni[0])
