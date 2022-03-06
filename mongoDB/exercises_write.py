@@ -6,79 +6,39 @@ db_name = "andywaltlova"
 databaze = client[db_name]
 
 # 1. Každý má svou pravdu
-# Vložení dvou her
+# Uvažujme data o dvou divadelních hrách, která jsou v následující tabulce.
 
-kolekce = databaze["hry"]
-play_1 = {
-    "Představení": "Modrovous",
-    "Délka v minutách": 70,
-    "Premiéra": "2018-12-15"
-}
-play_2 = {
-    "Představení": "Každý má svou pravdu",
-    "Délka v minutách": None,
-    "Premiéra": "2020-02-08"
-}
-hra_3 = {
-    "Představení": "Expres na západ",
-    "Délka v minutách": 120,
-    "Premiéra": "2019-11-13"
-}
+# Představení	            Délka v minutách	Premiéra	Derniéra
+# Modrovous	                              70	2018-12-15
+# Každý má svou pravdu		                    2020-02-08
+# Expres na západ	120		                                2019-11-13
 
-# Vlozeni po jednom
-play_1_id = kolekce.insert_one(play_1)
-play_2_id = kolekce.insert_one(play_2)
-play_3_id = kolekce.insert_one(hra_3)
+# Splň následující úkoly.
+# Přepiš tato data to dvou slovníků. Pokud nějaký sloupec nemá hodnotu, vynech ho.
+# Vlož jednotlivé slovníky postupně do své databáze do kolekce hry.
+# Nech si na obrazovku vypsat ID alespoň jednoho vloženého dokumentu.
 
+hry = []
 
-print(play_1_id.inserted_id)
-
-# Vlozeni for cyklem
-# plays = [play_1, play_2]
-# for play in plays:
-#     inserted = kolekce.insert_one(play)
-#     print(inserted.inserted_id)
-
-# Vlozeni pomoci insert_many
-# kolekce.insert_many([play_1, play_2])
-
-print('Inserted: ')
-documents = kolekce.find()
-for record in documents:
-    print(record.get('Délka v minutách', 'Delka neexistuje'))
-
-####################################################
-# print('After delete: ')
-
-kolekce.delete_many({'Představení': 'Modrovous'})
-kolekce.delete_many({'Představení': 'Každý má svou pravdu'})
-
-# documents = kolekce.find()
-# for record in documents:
-#     print(record)
 
 # 2. Knihovna
+# Níže jsou informace o třech různých knihách.
+
+# První kniha:
+# Název: Smrt bere jackpot
+# Autor: Vincent McEveety
+# Počet stran: 542
+
+# Druhá kniha:
+# Název: Zaklínač I. - Poslední přání
+# Autor: Andrzej Sapkowski
+# Počet povídek: 8
+# Počet stran: 274
+# Přepiš informace do slovníků a tyto slovníky vlož do jednoho seznamu. Tento seznam pak vlož najednou do kolekce knihy funkcí insert_many().
 
 kolekce = databaze["knihy"]
 
-knihy = [
-    {
-        "Název": "Smrt bere jackpot",
-        "Autor": "Vincent McEveety",
-        "Počet stran": 542
-    },
-    {
-        "Název": "Zaklínač I. - Poslední přání",
-        "Autor": "Andrzej Sapkowski",
-        "Počet povídek": 8,
-        "Počet stran": 274,
-    }
-]
-
-# kolekce.insert_many(knihy)
-# documents = kolekce.find()
-# for record in documents:
-#     print(record)
+knihy = []
 
 
 
